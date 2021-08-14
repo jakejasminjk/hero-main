@@ -1,0 +1,32 @@
+#Instructions to build and run
+# docker build -t <nameImage> .
+# docker run --name <containerName> -it --rm -v ${PWD}:/app -v /app/node_modules -p 3000:3000 -e CHOKIDAR_USEPOLLING=true <nameImage> 
+# --name sets a container name (optional parameter)
+# -it: starts container in interactive mode
+# --rm: removes container and volumes after the container exits(optional parameter, remove this if you want to reuse container)
+# -v mounts the code into the container at “/app” (this may not work on windows. If so remove this line on the run command)
+# -v uses container version of nodes module folder instead of local
+# -p maps container ports to local ports
+# CHOKIDAR_USEPOLLING=true enables polling so hot reloads work
+
+# pull official base image
+FROM node:15.14.0-alpine
+
+# set working directory
+WORKDIR /app
+
+# add `/app/node_modules/.bin` to $PATH
+ENV PATH /app/node_modules/.bin:$PATH
+
+# install app dependencies
+COPY package.json ./
+COPY package-lock.json ./
+RUN npm install --silent
+#RUN npm install react-scripts@4.0.3 -g --silent
+
+
+# add app
+COPY . ./
+
+# start app
+CMD ["npm", "start"]

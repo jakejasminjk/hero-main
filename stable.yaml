@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hero-app
+spec:
+  selector:
+    matchLabels:
+      app: hero
+  replicas: 2 # tells deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: hero
+    spec:
+      containers:
+      - name: hero-backend
+        image: jakejasminjk/hero-backend:latest
+        ports:
+        - containerPort: 5000
+      containers:
+      - name: hero-front
+        image: jakejasminjk/hero-frontend:latest
+        ports:
+        - containerPort: 3000

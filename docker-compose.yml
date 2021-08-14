@@ -1,0 +1,45 @@
+version: '3'
+services:
+  nginx:
+    depends_on:
+      - client
+      - backend
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    ports:
+      - "80:80"
+    networks:
+      - sub-etha
+  client:
+    build:
+      dockerfile: Dockerfile
+      context: ./hero-app
+    #ports:
+      #- 3000:3000
+    volumes:
+      - /app/node_modules # Inside the container, don't try to override this folder, just leave as is
+    restart: on-failure
+    container_name: client
+    networks:
+      - sub-etha
+    #stdin_open: true
+    depends_on: 
+      - backend
+  backend:
+    build:
+      dockerfile: Dockerfile
+      context: ./hero-back
+    env_file: 
+      - ./hero-back/.env
+    #ports:
+    #  - 5000:5000
+    volumes:
+      - /app/node_modules # Inside the container, don't try to override this folder, just leave as is
+    restart: on-failure
+    container_name: backend
+    networks:
+      - sub-etha
+networks:
+  sub-etha:

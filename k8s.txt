@@ -1,0 +1,6 @@
+'minikube start' to start minikube 
+'minikube stop'
+'minikube delete' to deleteminikube
+'kubectl proxy' must be running on a seperate console
+'kubectl get deployments' to show deployments. Replace deployments with pods or services to get those
+'kubectl apply -f .\fser.yaml' run the yaml file that can contain deployments or services

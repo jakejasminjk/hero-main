@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hero-back
+spec:
+  selector:
+    app: hero-back
+    tier: backend
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: http

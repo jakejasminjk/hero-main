@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hero-back
+spec:
+  selector:
+    matchLabels:
+      app: hero-back
+      tier: backend
+      track: stable
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: hero-back
+        tier: backend
+        track: stable
+    spec:
+      containers:
+        - name: hero-back
+          image: "jakejasminjk/hero-backend:latest"
+          ports:
+            - name: http
+              containerPort: 80
