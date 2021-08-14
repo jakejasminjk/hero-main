@@ -19,10 +19,7 @@ phases:
     commands:
       - echo Build started on `date`
       # Run tests with built Docker images
-      - echo Run react tests...
-      - docker run -e CI=true lukondefmwila/react-test
-      - echo Run nodejs tests...
-      - docker run -e CI=true lukondefmwila/nodejs-test
+      ##HERE
       # Scan Docker image with Snyk
       ## Client
       ## Run test for security vulernabilities
@@ -36,15 +33,15 @@ phases:
       # - ./snyk monitor --docker lukondefmwila/nodejs-test:latest --file=./backend/Dockerfile.dev
       # Build the Docker images
       - echo Building the production Docker image...
-      - docker build -t lukondefmwila/dkr-multicontainer-app-client ./client
-      - docker build -t lukondefmwila/dkr-multicontainer-app-backend ./backend
-      - docker build -t lukondefmwila/dkr-multicontainer-app-nginx ./nginx
+      - docker build -t jakejasminjk/client ./client
+      - docker build -t jakejasminjk/backend ./backend
+      - docker build -t jakejasminjk/nginx ./nginx
       # Log in to the Docker CLI
       - echo "$DOCKER_PW" | docker login -u "$DOCKER_ID" --password-stdin
   post_build:
     commands:
       # Take these images and push them to Docker hub
       - echo Pushing the Docker images...
-      - docker push lukondefmwila/dkr-multicontainer-app-client
-      - docker push lukondefmwila/dkr-multicontainer-app-backend
-      - docker push lukondefmwila/dkr-multicontainer-app-nginx
+      - docker push jakejasminjk/client
+      - docker push jakejasminjk/backend
+      - docker push jakejasminjk/nginx
