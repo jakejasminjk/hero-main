@@ -33,8 +33,8 @@ phases:
       # - ./snyk monitor --docker lukondefmwila/nodejs-test:latest --file=./backend/Dockerfile.dev
       # Build the Docker images
       - echo Building the production Docker image...
-      - docker build -t jakejasminjk/client ./client
-      - docker build -t jakejasminjk/backend ./backend
+      - docker build -t jakejasminjk/client ./hero-app
+      - docker build -t jakejasminjk/backend ./hero-back
       - docker build -t jakejasminjk/nginx ./nginx
       # Log in to the Docker CLI
       #- echo "$DOCKER_PW" | docker login -u "$DOCKER_ID" --password-stdin
