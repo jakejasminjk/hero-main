@@ -32,6 +32,7 @@ phases:
       ## Setup continuous monitoring
       # - ./snyk monitor --docker lukondefmwila/nodejs-test:latest --file=./backend/Dockerfile.dev
       # Build the Docker images
+      - docker -version
       - echo Building the production Docker image...
       - docker build -t jakejasminjk/client ./hero-app
       - docker build -t jakejasminjk/backend ./hero-back
